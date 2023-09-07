@@ -41,10 +41,6 @@ def calculo_tiro():
 root = tk.Tk()
 root.geometry('1000x700')
 root.title("Ucalc Interfaz")
-big_frame = ttk.Frame(root)
-big_frame.pack(fill="both", expand=True)
-root.tk.call("source", "Azure-ttk-theme\zure.tcl")
-root.tk.call("set_theme", "dark")
 
   
 # Create the entry field for the numbers
