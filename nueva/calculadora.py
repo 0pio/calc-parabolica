@@ -27,12 +27,12 @@ def calculo_tiro():
                 if Xc > 0 and Xc < 1:
                     break
 
-        result_label2.config(text=f"El angulo es {theta}")
-        result_label.config(text=f"La distancia de compresion es {Xc}")
+        result_label2.config(text=f"Angulo {theta}")
+        result_label.config(text=f"Compresión (xc) {Xc}")
 
     except ValueError:
-        result_label.config(text="Por favor ingresa valores validos")
-        result_label2.config(text="Por favor ingresa valores validos")
+        result_label.config(text="Ingresa numeros ")
+        result_label2.config(text="Ingresa numeros")
 
     #termina parte del calculo del tiro 
     #ahora creamos todo lo que se ve de la calculadora
@@ -42,6 +42,7 @@ root = tk.Tk()
 root.geometry('1920x1080')
 root.title("Ucalc Interfaz")
 root.configure(bg="white")
+
 
   
 # Create the entry field for the numbers
@@ -84,7 +85,7 @@ valores_entrada_label.place(relx=0.025, rely=0.025)
 # Crea una etiqueta para el título "RESULTADO"
 resultado_label = ttk.Label(root, text='RESULTADO',font=("Lucida Sans Typewriter", 20), background="white")
 resultado_label.pack(pady=10)
-resultado_label.place(relx=0.5, rely=0.1)
+resultado_label.place(relx=0.65, rely=0.04)
 #crea la etiqueta para el obstaculo
 obstaculo_label = ttk.Label(root, text='OBSTACULO',font=("Lucida Sans Typewriter", 20), background="white")
 obstaculo_label.pack(pady=10)
@@ -119,18 +120,26 @@ texto_Longitud.place(relx=0.025, rely=0.45)
 
 
 # Crear el botón pa calcular
-calcular = ttk.Button(root, text="CALCULAR", style="Accent.TButton", command=calculo_tiro)
-calcular.place(relx=0.5, rely=0.55)
+calcular = tk.Button(root, text="CALCULAR", command=calculo_tiro,
+    bg="blue",          
+    fg="white",    
+    activebackground="blue", 
+    activeforeground="white", 
+    borderwidth=2,   
+    relief="flat",            
+    font=("Lucida Sans Typewriter", 11)
+)
+calcular.place(relx=0.3, rely=0.60)
 
 #create the label for the result xc
-result_label = ttk.Label(root, text='compresión del resorte',background="red", relief="sunken", width=30,font=("Lucida Sans Typewriter", 14) )
+result_label = ttk.Label(root, text='Compresión del resorte',background="white", relief="sunken", width=25,font=("Lucida Sans Typewriter", 14) )
 result_label.pack(pady=10,ipadx=10,ipady=10)
-result_label.place(relx=0.5, rely=0.2)  
+result_label.place(relx=0.5, rely=0.15)  
 
 #create the label for the result angulo
-result_label2 = ttk.Label(root, text='',background="white",relief="sunken",width=30,font=("Lucida Sans Typewriter", 14))
+result_label2 = ttk.Label(root, text='Angulo del disparo',background="white",relief="sunken",width=25,font=("Lucida Sans Typewriter", 14))
 result_label2.pack(pady=10,ipadx=10,ipady=10)
-result_label2.place(relx=0.5, rely=0.4)
+result_label2.place(relx=0.7, rely=0.15)
 
     #termina la parte de el layout de la calculadora
     #ahora es la parte de definir el movimiento con las flechas
@@ -210,8 +219,16 @@ def borrar_campos(event=None):
     entry_m.focus_set()
 
 # Crea el botón para borrar los campos
-boton_borrar = ttk.Button(root, text="Borrar DATOS", command=borrar_campos)
-boton_borrar.place(relx=0.5, rely=0.523, anchor="center")
+boton_borrar = tk.Button(root, text="Borrar datos", command=borrar_campos, 
+    bg="#818181",          
+    fg="white",    
+    activebackground="#818181", 
+    activeforeground="white", 
+    borderwidth=2,   
+    relief="flat",            
+    font=("Lucida Sans Typewriter", 11)
+    )
+boton_borrar.place(relx=0.33, rely=0.73, anchor="center")
 
 # Asocia el evento de teclado "Shift-Enter" a la función borrar_campos
 root.bind('<Shift-Return>', borrar_campos)
@@ -228,13 +245,21 @@ carpeta_paisajes = os.path.join(carpeta_imagenes, "carpeta")
 #Icono de la ventana
 root.iconbitmap(os.path.join(carpeta_imagenes, "logochikito.ico")) 
 
-#Carga imagen del logo EN LA CALCULADORA
-imagen = Image.open(os.path.join(carpeta_paisajes, "logo.jpg"))
-imagen = imagen.resize((250, 150), Image.ANTIALIAS)  # Cambia el tamaño de la imagen
-fondo = ImageTk.PhotoImage(imagen)
+#Carga imagen de agyuda
+imagen_ayuda = Image.open(os.path.join(carpeta_imagenes, "ayuda.png"))
+imagen_ayuda = imagen_ayuda.resize((500, 300), Image.ANTIALIAS)  # Cambia el tamaño de la imagen_logo
+ayuda = ImageTk.PhotoImage(imagen_ayuda)
 # Crea la etiqueta y configura su posición y tamaño
-etiqueta = Label(root, image=fondo, width=250, height=150)
-etiqueta.place(x=1150, y=50)
+etiqueta_ayuda = Label(root, image=ayuda, width=500, height=300)
+etiqueta_ayuda.place(relx=0.8, rely=0.7)
+
+#Carga imagen_logo del logo EN LA CALCULADORA
+imagen_logo = Image.open(os.path.join(carpeta_paisajes, "logo.jpg"))
+imagen_logo = imagen_logo.resize((500, 300), Image.ANTIALIAS)  # Cambia el tamaño de la imagen_logo
+logo = ImageTk.PhotoImage(imagen_logo)
+# Crea la etiqueta y configura su posición y tamaño
+etiqueta_logo = Label(root, image=logo, width=500, height=300)  
+etiqueta_logo.place(relx=0.44, rely=0.3)
 
     #Termina la parte de las imagenes en la calculadora
     #empieza la parte de la ayuda
@@ -248,8 +273,9 @@ def abrir_ventana():
     etiqueta.pack()
     nueva_ventana.grab_set()
 # Crear un botón para abrir la ayuda
-boton_a = ttk.Button(root, text="¿AYUDA?", style="Accent.TButton", command=abrir_ventana)
-boton_a.pack()
+boton_ayuda = ttk.Button(root, text="¿AYUDA?", style="Accent.TButton", command=abrir_ventana)
+boton_ayuda.pack()
+boton_ayuda.place(relx=0.9, rely=0.9)
 
     #termina la parte de la ayuda
     #empieza la parte para correr el main loop
