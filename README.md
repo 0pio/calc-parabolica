@@ -1,0 +1,1 @@
+Una calculadora de tiro parabolico hecha por dos mecos que no sabían programar y pensaban que sí sabían porque le preguntaban a chat GPT y el codigo funcionaba aveces, además los dos mecos creían que la calculadora funcionaba y que hiban a ganar el concurso, spoiler no funcionó y se perdió epicamente sin que le atinaran ni una vez. 
